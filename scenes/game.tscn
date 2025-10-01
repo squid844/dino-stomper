@@ -1,0 +1,44 @@
+[gd_scene load_steps=4 format=3 uid="uid://dkfy3y2orda1t"]
+
+[ext_resource type="Texture2D" uid="uid://6owj8i574ji1" path="res://icon.svg" id="1_uwrxv"]
+[ext_resource type="Script" uid="uid://dldp6b70n8ccj" path="res://scripts/game.gd" id="1_yqjtg"]
+[ext_resource type="Script" uid="uid://bed13xsg2p3j6" path="res://scripts/stats.gd" id="3_lnu2h"]
+
+[node name="Game" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yqjtg")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ClickButton" type="TextureButton" parent="CenterContainer"]
+layout_mode = 2
+texture_normal = ExtResource("1_uwrxv")
+
+[node name="Stats" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+script = ExtResource("3_lnu2h")
+
+[node name="StompLabel" type="Label" parent="Stats"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "0 stomps"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="stomps_change" from="." to="Stats" method="_on_game_stomps_change"]
+[connection signal="button_down" from="CenterContainer/ClickButton" to="." method="_on_click_button_button_down"]
