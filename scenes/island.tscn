@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://c24yr7xx7bwps"]
+
+[ext_resource type="PackedScene" uid="uid://yp3oyehyqa4a" path="res://scenes/dino.tscn" id="1_2v8eh"]
+[ext_resource type="Script" uid="uid://cnyw0xa0j80hj" path="res://scripts/island.gd" id="1_g61je"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_g61je"]
+height = 10.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_afvvs"]
+top_radius = 10.0
+
+[node name="Island" type="Node3D"]
+script = ExtResource("1_g61je")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("CylinderShape3D_g61je")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D"]
+mesh = SubResource("CylinderMesh_afvvs")
+skeleton = NodePath("../../..")
+
+[node name="Dino" parent="." instance=ExtResource("1_2v8eh")]
+transform = Transform3D(0.34704658, 0, 0.3599426, 0, 0.5, 0, -0.3599426, 0, 0.34704658, 0, 1, 0)
