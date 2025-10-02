@@ -1,11 +1,26 @@
-[gd_scene load_steps=4 format=3 uid="uid://dkfy3y2orda1t"]
+[gd_scene load_steps=7 format=3 uid="uid://dkfy3y2orda1t"]
 
 [ext_resource type="Script" uid="uid://dldp6b70n8ccj" path="res://scripts/game.gd" id="1_yqjtg"]
 [ext_resource type="Script" uid="uid://bed13xsg2p3j6" path="res://scripts/stats.gd" id="3_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://c24yr7xx7bwps" path="res://scenes/island.tscn" id="4_lbhrr"]
 
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_lnu2h"]
+rayleigh_color = Color(0.002933112, 0.11860051, 0.18381426, 1)
+mie_color = Color(0.12834173, 0.020479826, 0.44870198, 1)
+ground_color = Color(0.15250063, 0.12114709, 0.4111225, 1)
+
+[sub_resource type="Sky" id="Sky_lbhrr"]
+sky_material = SubResource("PhysicalSkyMaterial_lnu2h")
+
+[sub_resource type="Environment" id="Environment_iywne"]
+background_mode = 2
+sky = SubResource("Sky_lbhrr")
+
 [node name="Game" type="Node3D"]
 script = ExtResource("1_yqjtg")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_iywne")
 
 [node name="Stats" type="VBoxContainer" parent="."]
 anchors_preset = 10
