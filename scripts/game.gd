@@ -3,7 +3,8 @@ extends Node3D
 const save_path = "user://userdata.save"
 
 var stomps = 0
-var amount_per_click = 1
+@onready var dino_group: Node3D = $Island.dino_group
+@onready var amount_per_click = dino_group.get_child_count()
 
 signal island_clicked
 signal stomps_change
@@ -33,7 +34,10 @@ func load_data():
 			stomps = data.get("stomps", 0)
 	else:
 		save_data()
-
+		
+func _process(delta: float) -> void:
+	amount_per_click = dino_group.get_child_count()
+	
 func _on_island_clicked() -> void:
 	stomps += amount_per_click
 	emit_signal("stomps_change", stomps)

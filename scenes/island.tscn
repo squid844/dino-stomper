@@ -11,6 +11,7 @@ top_radius = 10.0
 
 [node name="Island" type="Node3D"]
 script = ExtResource("1_g61je")
+dino_scene = ExtResource("1_2v8eh")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
@@ -21,5 +22,7 @@ shape = SubResource("CylinderShape3D_g61je")
 mesh = SubResource("CylinderMesh_afvvs")
 skeleton = NodePath("../../..")
 
-[node name="Dino" parent="." instance=ExtResource("1_2v8eh")]
-transform = Transform3D(0.34704658, 0, 0.3599426, 0, 0.5, 0, -0.3599426, 0, 0.34704658, 0, 1, 0)
+[node name="DinoGroup" type="Node3D" parent="."]
+
+[node name="Dino" parent="DinoGroup" instance=ExtResource("1_2v8eh")]
+transform = Transform3D(0.0676157, 0, 0.49540702, 0, 0.5, 0, -0.49540702, 0, 0.0676157, 0, 1.0114473, 2.5655787)
