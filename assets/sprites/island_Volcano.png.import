@@ -2,21 +2,21 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bkbdlgs0y1b8x"
-path.s3tc="res://.godot/imported/stégausaure_stego_1.png-d223a2d2a2c0e256442700f5628d83ad.s3tc.ctex"
-path.etc2="res://.godot/imported/stégausaure_stego_1.png-d223a2d2a2c0e256442700f5628d83ad.etc2.ctex"
+uid="uid://bnicwwn33r5vw"
+path.s3tc="res://.godot/imported/island_Volcano.png-d87e9a0000776b9b6de98aded68c60eb.s3tc.ctex"
+path.etc2="res://.godot/imported/island_Volcano.png-d87e9a0000776b9b6de98aded68c60eb.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "2eb73fe3304bd114b5f6e01a8c723126"
+"md5": "819d98e07923bdc3cb96d2b9f5cfe079"
 }
 
 [deps]
 
-source_file="res://assets/sprites/stégausaure_stego_1.png"
-dest_files=["res://.godot/imported/stégausaure_stego_1.png-d223a2d2a2c0e256442700f5628d83ad.s3tc.ctex", "res://.godot/imported/stégausaure_stego_1.png-d223a2d2a2c0e256442700f5628d83ad.etc2.ctex"]
+source_file="res://assets/sprites/island_Volcano.png"
+dest_files=["res://.godot/imported/island_Volcano.png-d87e9a0000776b9b6de98aded68c60eb.s3tc.ctex", "res://.godot/imported/island_Volcano.png-d87e9a0000776b9b6de98aded68c60eb.etc2.ctex"]
 
 [params]
 

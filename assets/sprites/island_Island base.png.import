@@ -2,21 +2,21 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bkbdlgs0y1b8x"
-path.s3tc="res://.godot/imported/stégausaure_stego_1.png-d223a2d2a2c0e256442700f5628d83ad.s3tc.ctex"
-path.etc2="res://.godot/imported/stégausaure_stego_1.png-d223a2d2a2c0e256442700f5628d83ad.etc2.ctex"
+uid="uid://radqgiassqdb"
+path.s3tc="res://.godot/imported/island_Island base.png-984659cb42f60e3d6314f5611e851c53.s3tc.ctex"
+path.etc2="res://.godot/imported/island_Island base.png-984659cb42f60e3d6314f5611e851c53.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "2eb73fe3304bd114b5f6e01a8c723126"
+"md5": "12f581a84b32b0e2068959865cdbfcc6"
 }
 
 [deps]
 
-source_file="res://assets/sprites/stégausaure_stego_1.png"
-dest_files=["res://.godot/imported/stégausaure_stego_1.png-d223a2d2a2c0e256442700f5628d83ad.s3tc.ctex", "res://.godot/imported/stégausaure_stego_1.png-d223a2d2a2c0e256442700f5628d83ad.etc2.ctex"]
+source_file="res://assets/sprites/island_Island base.png"
+dest_files=["res://.godot/imported/island_Island base.png-984659cb42f60e3d6314f5611e851c53.s3tc.ctex", "res://.godot/imported/island_Island base.png-984659cb42f60e3d6314f5611e851c53.etc2.ctex"]
 
 [params]
 

@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=3 uid="uid://ejqnjd18110x"]
+
+[ext_resource type="Script" uid="uid://b6frq1fysmcd" path="res://scripts/button_manager.gd" id="1_cxv6e"]
+[ext_resource type="PackedScene" uid="uid://dh1odu7gvadb0" path="res://scenes/fade_transition.tscn" id="2_ncxof"]
+
+[node name="StartingMenu" type="Node2D"]
+
+[node name="ButtonManager" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+script = ExtResource("1_cxv6e")
+
+[node name="StartButton" type="Button" parent="ButtonManager"]
+layout_mode = 0
+offset_left = 710.0
+offset_top = 400.0
+offset_right = 1210.0
+offset_bottom = 500.0
+text = "START GAME"
+
+[node name="QuitButton" type="Button" parent="ButtonManager"]
+layout_mode = 0
+offset_left = 710.0
+offset_top = 600.0
+offset_right = 1210.0
+offset_bottom = 700.0
+text = "QUIT GAME"
+
+[node name="FadeTransition" parent="." instance=ExtResource("2_ncxof")]
+visible = false
+
+[node name="FadeTimer" type="Timer" parent="FadeTransition"]
+
+[connection signal="pressed" from="ButtonManager/StartButton" to="ButtonManager" method="_on_start_button_pressed"]
+[connection signal="pressed" from="ButtonManager/QuitButton" to="ButtonManager" method="_on_quit_button_pressed"]
+[connection signal="timeout" from="FadeTransition/FadeTimer" to="ButtonManager" method="_on_fade_timer_timeout"]

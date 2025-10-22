@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://cf6u8mc1ko724"]
+
+[ext_resource type="Shader" uid="uid://byvmyxl07oucw" path="res://assets/shaders/space.gdshader" id="1_dtwn4"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_rysn1"]
+size = Vector2(1000, 1000)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c6rj5"]
+render_priority = 0
+shader = ExtResource("1_dtwn4")
+shader_parameter/uv_scale = 10.0
+shader_parameter/scroll_speed_layer1 = Vector2(0.002, 0)
+shader_parameter/scroll_speed_layer2 = Vector2(0.0005, 0)
+shader_parameter/star_density1 = 25.0
+shader_parameter/star_size1 = 0.02
+shader_parameter/twinkle_intensity1 = 0.6
+shader_parameter/star_density2 = 60.0
+shader_parameter/star_size2 = 0.008
+shader_parameter/twinkle_intensity2 = 0.3
+
+[sub_resource type="GDScript" id="GDScript_rysn1"]
+
+[node name="Space" type="MeshInstance3D"]
+mesh = SubResource("PlaneMesh_rysn1")
+surface_material_override/0 = SubResource("ShaderMaterial_c6rj5")
+script = SubResource("GDScript_rysn1")

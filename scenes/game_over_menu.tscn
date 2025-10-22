@@ -1,0 +1,66 @@
+[gd_scene load_steps=5 format=3 uid="uid://bnqmdndr2ggd8"]
+
+[ext_resource type="PackedScene" uid="uid://dr1872ok4d46m" path="res://scenes/data_manager.tscn" id="1_ccgoi"]
+[ext_resource type="Script" uid="uid://r0y1i7qodni2" path="res://scripts/game_over_stats.gd" id="1_cwb3k"]
+[ext_resource type="FontFile" uid="uid://m4cqhajh3qxk" path="res://assets/fonts/Tiny5/Tiny5-Regular.ttf" id="2_ccgoi"]
+[ext_resource type="PackedScene" uid="uid://dh1odu7gvadb0" path="res://scenes/fade_transition.tscn" id="4_81acl"]
+
+[node name="GameOverMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DataManager" parent="." instance=ExtResource("1_ccgoi")]
+
+[node name="GameOverStats" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 694.0
+offset_top = 259.0
+offset_right = 1233.0
+offset_bottom = 675.0
+script = ExtResource("1_cwb3k")
+
+[node name="GameOverTag" type="Label" parent="GameOverStats"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7656862, 0, 0.07072248, 1)
+theme_override_fonts/font = ExtResource("2_ccgoi")
+theme_override_font_sizes/font_size = 100
+text = "GAME OVER"
+
+[node name="StompsTag" type="Label" parent="GameOverStats"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.84751564, 0.35468647, 0.5652415, 1)
+theme_override_fonts/font = ExtResource("2_ccgoi")
+theme_override_font_sizes/font_size = 30
+text = "0 Stomps this cycle"
+
+[node name="DinoTag" type="Label" parent="GameOverStats"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ccgoi")
+theme_override_font_sizes/font_size = 30
+text = "Total Dinos this cycle :
+	- Stego : 0"
+
+[node name="RestartButton" type="Button" parent="GameOverStats"]
+layout_mode = 2
+text = "Start a new Cycle
+"
+
+[node name="QuitButton" type="Button" parent="GameOverStats"]
+layout_mode = 2
+text = "Quit Game
+"
+
+[node name="FadeTransition" parent="." instance=ExtResource("4_81acl")]
+layout_mode = 0
+
+[node name="FadeTimer" type="Timer" parent="FadeTransition"]
+autostart = true
+
+[connection signal="reset_data" from="GameOverStats" to="DataManager" method="_on_game_over_stats_reset_data"]
+[connection signal="button_down" from="GameOverStats/RestartButton" to="GameOverStats" method="_on_restart_button_button_down"]
+[connection signal="button_down" from="GameOverStats/QuitButton" to="GameOverStats" method="_on_quit_button_button_down"]
+[connection signal="timeout" from="FadeTransition/FadeTimer" to="GameOverStats" method="_on_fade_timer_timeout"]

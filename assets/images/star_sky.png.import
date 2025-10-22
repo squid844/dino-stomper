@@ -2,21 +2,18 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bkbdlgs0y1b8x"
-path.s3tc="res://.godot/imported/stégausaure_stego_1.png-d223a2d2a2c0e256442700f5628d83ad.s3tc.ctex"
-path.etc2="res://.godot/imported/stégausaure_stego_1.png-d223a2d2a2c0e256442700f5628d83ad.etc2.ctex"
+uid="uid://cecymosxshvvr"
+path.s3tc="res://.godot/imported/star_sky.png-ce72252b0ec1123705d4d2386ff82078.s3tc.ctex"
+path.etc2="res://.godot/imported/star_sky.png-ce72252b0ec1123705d4d2386ff82078.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
-generator_parameters={
-"md5": "2eb73fe3304bd114b5f6e01a8c723126"
-}
 
 [deps]
 
-source_file="res://assets/sprites/stégausaure_stego_1.png"
-dest_files=["res://.godot/imported/stégausaure_stego_1.png-d223a2d2a2c0e256442700f5628d83ad.s3tc.ctex", "res://.godot/imported/stégausaure_stego_1.png-d223a2d2a2c0e256442700f5628d83ad.etc2.ctex"]
+source_file="res://assets/images/star_sky.png"
+dest_files=["res://.godot/imported/star_sky.png-ce72252b0ec1123705d4d2386ff82078.s3tc.ctex", "res://.godot/imported/star_sky.png-ce72252b0ec1123705d4d2386ff82078.etc2.ctex"]
 
 [params]
 
@@ -39,7 +36,7 @@ process/channel_remap/alpha=3
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/normal_map_invert_y=false
-process/hdr_as_srgb=false
+process/hdr_as_srgb=true
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=0
