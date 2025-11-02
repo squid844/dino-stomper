@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://2feeu6748e25"]
+
+[ext_resource type="PackedScene" uid="uid://dcwkam8lgf3ui" path="res://assets/sprites/meteorite.glb" id="1_dwxsp"]
+
+[node name="meteorite" instance=ExtResource("1_dwxsp")]
+
+[node name="Cube" parent="." index="0"]
+cast_shadow = 0

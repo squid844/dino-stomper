@@ -23,7 +23,7 @@ func _on_game_island_clicked() -> void:
 	for dino in dinos:
 		dino.jump()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	rotation.y += rotation_speed
 	if position.y >= 0.3 or position.y <= -0.3: 
 		moving_direction = -moving_direction

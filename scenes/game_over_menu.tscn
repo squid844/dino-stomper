@@ -55,7 +55,7 @@ text = "Quit Game
 "
 
 [node name="FadeTransition" parent="." instance=ExtResource("4_81acl")]
-layout_mode = 0
+layout_mode = 1
 
 [node name="FadeTimer" type="Timer" parent="FadeTransition"]
 autostart = true

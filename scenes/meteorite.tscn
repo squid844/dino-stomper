@@ -1,100 +1,62 @@
-[gd_scene load_steps=16 format=3 uid="uid://58q7a2w4p7g1"]
+[gd_scene load_steps=10 format=3 uid="uid://58q7a2w4p7g1"]
 
 [ext_resource type="Script" uid="uid://law8kwlsx0kg" path="res://scripts/meteorite.gd" id="1_dd20e"]
+[ext_resource type="PackedScene" uid="uid://2feeu6748e25" path="res://scenes/meteorite_skin.tscn" id="2_ghl35"]
 
-[sub_resource type="SphereMesh" id="SphereMesh_vol5a"]
+[sub_resource type="Curve" id="Curve_ghl35"]
+_data = [Vector2(0.0075757504, 0.9101124), 0.0, 0.0, 0, 0, Vector2(0.75757575, 0.6067416), 0.0, 0.0, 0, 0, Vector2(1, 0.10112369), 0.0, 0.0, 0, 0]
+point_count = 3
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dd20e"]
-albedo_color = Color(0.39688927, 0.39688927, 0.39688924, 1)
+[sub_resource type="CurveTexture" id="CurveTexture_ur1br"]
+curve = SubResource("Curve_ghl35")
 
-[sub_resource type="SphereMesh" id="SphereMesh_ghl35"]
-radius = 0.58
-height = 1.16
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ghl35"]
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 1.0
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+gravity = Vector3(6, 6, 0)
+scale_curve = SubResource("CurveTexture_ur1br")
+turbulence_noise_speed_random = 0.02
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ur1br"]
-transparency = 1
-albedo_color = Color(0.6797708, 0.20119503, 0.21919504, 0.3529412)
+[sub_resource type="Gradient" id="Gradient_ur1br"]
+offsets = PackedFloat32Array(0.23636363, 1)
+colors = PackedColorArray(0.99122614, 0.3267118, 0, 1, 0.98468786, 0.7682911, 0, 1)
 
-[sub_resource type="SphereMesh" id="SphereMesh_cdrwk"]
-radius = 0.55
-height = 1.1
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_cdrwk"]
+gradient = SubResource("Gradient_ur1br")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yg4ol"]
-transparency = 1
-albedo_color = Color(0.59607846, 0.3019608, 0.19215687, 0.3529412)
+albedo_texture = SubResource("GradientTexture2D_cdrwk")
+grow = true
+grow_amount = 0.1
+proximity_fade_distance = 0.01
 
 [sub_resource type="SphereMesh" id="SphereMesh_xldgd"]
-radius = 0.55
-height = 1.1
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e6y6t"]
-transparency = 1
-albedo_color = Color(0.5601185, 0.33448863, 0.13116467, 0.3529412)
-
-[sub_resource type="SphereMesh" id="SphereMesh_5tvew"]
-radius = 0.6
-height = 1.2
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vbam4"]
-transparency = 1
-albedo_color = Color(0.58202934, 0.40422344, 0.22871074, 0.3529412)
-
-[sub_resource type="SphereMesh" id="SphereMesh_6k8oi"]
-radius = 0.65
-height = 1.3
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kiqhp"]
-transparency = 1
-albedo_color = Color(0.750163, 0.5881182, 0.19383588, 0.3529412)
-
-[sub_resource type="SphereMesh" id="SphereMesh_412i8"]
-radius = 0.7
-height = 1.4
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_huw2t"]
-transparency = 1
-albedo_color = Color(0.79591596, 0.645327, 0.46938843, 0.3529412)
+material = SubResource("StandardMaterial3D_yg4ol")
+radial_segments = 10
 
 [node name="Meteorite" type="Node3D"]
+transform = Transform3D(0.3851975, 0.92283416, 0, -0.92283416, 0.3851975, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("1_dd20e")
 
-[node name="meteorite" type="MeshInstance3D" parent="."]
-mesh = SubResource("SphereMesh_vol5a")
-surface_material_override/0 = SubResource("StandardMaterial3D_dd20e")
-
-[node name="fire" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.04929793, 0, -0.00547421)
-mesh = SubResource("SphereMesh_ghl35")
-surface_material_override/0 = SubResource("StandardMaterial3D_ur1br")
-
-[node name="fire2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.11802399, 0.13076222, -0.2044919)
-mesh = SubResource("SphereMesh_cdrwk")
-surface_material_override/0 = SubResource("StandardMaterial3D_yg4ol")
-
-[node name="fire3" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.21315861, 0.2815752, -0.4182526)
-mesh = SubResource("SphereMesh_xldgd")
-skeleton = NodePath("../fire2")
-surface_material_override/0 = SubResource("StandardMaterial3D_e6y6t")
-
-[node name="fire4" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3272959, 0.36908543, -0.6502986)
-mesh = SubResource("SphereMesh_5tvew")
-surface_material_override/0 = SubResource("StandardMaterial3D_vbam4")
-
-[node name="fire5" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.39602196, 0.49984765, -0.84931624)
-mesh = SubResource("SphereMesh_6k8oi")
-surface_material_override/0 = SubResource("StandardMaterial3D_kiqhp")
-
-[node name="fire6" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.49115658, 0.65066063, -1.063077)
-mesh = SubResource("SphereMesh_412i8")
-skeleton = NodePath("../fire2")
-surface_material_override/0 = SubResource("StandardMaterial3D_huw2t")
+[node name="meteorite" parent="." instance=ExtResource("2_ghl35")]
 
 [node name="ThresholdTimer" type="Timer" parent="."]
 autostart = true
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(0.8984107, 0.42857957, -0.09579766, 0.3816949, -0.65417325, 0.6529682, 0.21718082, -0.62319875, -0.7513027, -0.24370536, 0.5189394, 0.1335411)
+cast_shadow = 0
+amount = 30
+lifetime = 1.5
+preprocess = 0.5
+speed_scale = 0.5
+explosiveness = 0.07
+randomness = 0.09
+process_material = SubResource("ParticleProcessMaterial_ghl35")
+draw_pass_1 = SubResource("SphereMesh_xldgd")
 
 [connection signal="timeout" from="ThresholdTimer" to="." method="_on_threshold_timer_timeout"]

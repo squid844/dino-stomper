@@ -1,9 +1,9 @@
-extends VBoxContainer
+extends HBoxContainer
 
-@onready var stomp_label: Label = $StatsBackground/StompLabel
-@onready var fruits_label: Label = $StatsBackground/FruitsLabel
-@onready var timer_label: Label = $StatsBackground/TimerLabel
-@onready var added_time_label = $StatsBackground/AddedTimeLabel
+@onready var stomp_label: Label = $StompLabel
+@onready var fruits_label: Label = $FruitsLabel
+@onready var timer_label: Label = $TimerLabel
+@onready var added_time_label = $AddedTimeLabel
 
 
 func _on_game_stomps_change(amount) -> void:
