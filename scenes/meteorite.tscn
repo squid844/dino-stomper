@@ -52,10 +52,9 @@ transform = Transform3D(0.8984107, 0.42857957, -0.09579766, 0.3816949, -0.654173
 cast_shadow = 0
 amount = 30
 lifetime = 1.5
-preprocess = 0.5
-speed_scale = 0.5
+speed_scale = 0.3
 explosiveness = 0.07
-randomness = 0.09
+randomness = 0.01
 process_material = SubResource("ParticleProcessMaterial_ghl35")
 draw_pass_1 = SubResource("SphereMesh_xldgd")
 

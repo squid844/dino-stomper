@@ -1,4 +1,4 @@
-extends HBoxContainer
+extends VBoxContainer
 
 @onready var stomp_label: Label = $StompLabel
 @onready var fruits_label: Label = $FruitsLabel

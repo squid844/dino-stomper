@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dkfy3y2orda1t"]
+[gd_scene load_steps=16 format=3 uid="uid://dkfy3y2orda1t"]
 
 [ext_resource type="Script" uid="uid://dldp6b70n8ccj" path="res://scripts/game.gd" id="1_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://yp3oyehyqa4a" path="res://scenes/dino.tscn" id="2_iywne"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://u86veet8lfqs" path="res://assets/sprites/stego.png" id="6_gee14"]
 [ext_resource type="PackedScene" uid="uid://58q7a2w4p7g1" path="res://scenes/meteorite.tscn" id="6_vtaks"]
 [ext_resource type="Script" uid="uid://ivxruahk22dp" path="res://scripts/dino_buttons.gd" id="8_0tnpc"]
+[ext_resource type="Texture2D" uid="uid://bxyygs7sd6vmx" path="res://assets/images/frame.png" id="8_trtic"]
 [ext_resource type="FontFile" uid="uid://m4cqhajh3qxk" path="res://assets/fonts/Tiny5/Tiny5-Regular.ttf" id="9_0tnpc"]
 [ext_resource type="PackedScene" uid="uid://dh1odu7gvadb0" path="res://scenes/fade_transition.tscn" id="11_kvpfn"]
 
@@ -29,15 +30,15 @@ pixel_node_paths = [NodePath("../Scenery/Island"), NodePath("../Scenery/Meteorit
 lighting_node = NodePath("../Lighting/DirectionalLight3D")
 
 [node name="MainCamera" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.9848077, 0.17364818, 0, -0.17364818, 0.9848077, 0, 10, 50)
+transform = Transform3D(0.99939084, 0.03489949, 0, -0.034369294, 0.9842077, 0.17364816, 0.006060234, -0.17354238, 0.9848076, -30, 15, 50)
 
 [node name="Scenery" type="Node" parent="."]
 
 [node name="Space" parent="Scenery" instance=ExtResource("4_vtaks")]
-transform = Transform3D(1, 0, 0, 0, 0.17364822, -0.9848077, 0, 0.9848077, 0.17364822, 0, 0, -100)
+transform = Transform3D(1, 0, 0, 0, 0.17364822, -0.9848077, 0, 0.9848077, 0.17364822, 0.11505127, -0.64645386, -99.489624)
 
 [node name="Island" parent="Scenery" groups=["island"] instance=ExtResource("4_lbhrr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.174942, 0)
+transform = Transform3D(0.693691, 0, 0.7202727, 0, 1, 0, -0.7202727, 0, 0.693691, 0, 0, 0)
 
 [node name="Meteorite" parent="Scenery" instance=ExtResource("6_vtaks")]
 transform = Transform3D(0.3851975, 0.92283416, 0, -0.92283416, 0.3851975, 0, 0, 0, 1, 30, 20, 0)
@@ -51,24 +52,29 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 
-[node name="StatsBackground" type="Panel" parent="ControlLayer"]
-modulate = Color(0.9951927, 0.9771926, 0.98284966, 1)
-self_modulate = Color(11.84926, 6.0036535, 8.750384, 0.4117647)
-custom_minimum_size = Vector2(1920, 0)
-layout_mode = 0
-offset_right = 1920.0
-offset_bottom = 100.0
-size_flags_vertical = 3
+[node name="Frame" type="Sprite2D" parent="ControlLayer"]
+position = Vector2(960, 540)
+texture = ExtResource("8_trtic")
 
-[node name="Stats" type="HBoxContainer" parent="ControlLayer"]
+[node name="Stats" type="VBoxContainer" parent="ControlLayer"]
 clip_contents = true
-custom_minimum_size = Vector2(0, 100)
+custom_minimum_size = Vector2(840, 100)
 layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 45.0
-grow_horizontal = 2
+anchors_preset = -1
+offset_left = 30.0
+offset_top = 85.0
+offset_right = 840.0
+offset_bottom = 143.0
 script = ExtResource("3_lnu2h")
+
+[node name="AddedTimeLabel" type="Label" parent="ControlLayer/Stats"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0.50662, 0.82022494, 0.26477304, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("9_0tnpc")
+theme_override_font_sizes/font_size = 40
+text = "+0"
 
 [node name="TimerLabel" type="Label" parent="ControlLayer/Stats"]
 layout_mode = 2
@@ -82,7 +88,6 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("9_0tnpc")
 theme_override_font_sizes/font_size = 40
 text = "0 stomps"
-horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="FruitsLabel" type="Label" parent="ControlLayer/Stats"]
@@ -90,22 +95,19 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("9_0tnpc")
 theme_override_font_sizes/font_size = 40
 text = "0 fruits"
-
-[node name="AddedTimeLabel" type="Label" parent="ControlLayer/Stats"]
-visible = false
-layout_mode = 2
-theme_override_colors/font_color = Color(0.50662, 0.82022494, 0.26477304, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("9_0tnpc")
-theme_override_font_sizes/font_size = 40
-text = "+0"
+vertical_alignment = 1
 
 [node name="DinoButtons" type="VBoxContainer" parent="ControlLayer"]
+custom_minimum_size = Vector2(800, 650)
 layout_mode = 1
-anchors_preset = 9
+anchors_preset = -1
+anchor_top = 1.0
 anchor_bottom = 1.0
-offset_right = 170.0
-grow_vertical = 2
+offset_left = 30.0
+offset_top = -500.0
+offset_right = 851.0
+offset_bottom = -40.0
+grow_vertical = 0
 alignment = 1
 script = ExtResource("8_0tnpc")
 
@@ -113,6 +115,8 @@ script = ExtResource("8_0tnpc")
 clip_contents = true
 custom_minimum_size = Vector2(170, 180)
 layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 2
 ignore_texture_size = true
 
 [node name="Background" type="MeshInstance2D" parent="ControlLayer/DinoButtons/StegoButton"]
@@ -154,7 +158,7 @@ texture = ExtResource("6_gee14")
 [node name="Button" type="Button" parent="ControlLayer"]
 layout_mode = 0
 offset_left = 30.0
-offset_top = 21.0
+offset_top = 30.0
 offset_right = 145.0
 offset_bottom = 80.0
 text = "Options

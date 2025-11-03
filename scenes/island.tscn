@@ -1,8 +1,35 @@
-[gd_scene load_steps=4 format=3 uid="uid://c24yr7xx7bwps"]
+[gd_scene load_steps=9 format=3 uid="uid://c24yr7xx7bwps"]
 
 [ext_resource type="PackedScene" uid="uid://yp3oyehyqa4a" path="res://scenes/dino.tscn" id="1_2v8eh"]
 [ext_resource type="Script" uid="uid://cnyw0xa0j80hj" path="res://scripts/island.gd" id="1_g61je"]
 [ext_resource type="PackedScene" uid="uid://djaxx5rpghkf7" path="res://assets/sprites/island.glb" id="3_1uhhg"]
+
+[sub_resource type="Curve" id="Curve_1uhhg"]
+_limits = [0.0, 15.0, 0.0, 1.0]
+_data = [Vector2(0.030303031, 0.06741583), 0.0, 0.0, 0, 0, Vector2(0.79545456, 15), -4.6348324, -4.6348324, 0, 0, Vector2(1, 0.033707857), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_gt8d0"]
+curve = SubResource("Curve_1uhhg")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cngje"]
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 1.0
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+gravity = Vector3(-2, 9.8, 2)
+scale_curve = SubResource("CurveTexture_gt8d0")
+turbulence_noise_strength = 0.0
+turbulence_noise_scale = 0.0
+turbulence_noise_speed_random = 0.02
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1uhhg"]
+albedo_color = Color(0.5132329, 0.5132329, 0.5132329, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_gt8d0"]
+material = SubResource("StandardMaterial3D_1uhhg")
 
 [node name="Island" type="Node3D"]
 script = ExtResource("1_g61je")
@@ -10,5 +37,15 @@ dino_scene = ExtResource("1_2v8eh")
 
 [node name="island" parent="." instance=ExtResource("3_1uhhg")]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, -2.7938452, 0)
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="island"]
+transform = Transform3D(0.5, 0, 0, 0, 0.010933641, 0.49988046, 0, -0.49988046, 0.010933641, 2.5551069, 4.024046, -2.1138334)
+amount = 15
+lifetime = 4.0
+preprocess = 1.0
+speed_scale = 0.15
+randomness = 0.1
+process_material = SubResource("ParticleProcessMaterial_cngje")
+draw_pass_1 = SubResource("SphereMesh_gt8d0")
 
 [node name="DinoGroup" type="Node3D" parent="."]
