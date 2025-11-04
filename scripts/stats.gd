@@ -34,3 +34,7 @@ func _on_data_manager_update_timer_tag(time_left,threshold,added_seconds) -> voi
 		
 		# Fade out
 		time_tween.tween_property(added_time_label, "modulate:a", 0.0, 0.3)
+
+
+func _on_stego_button_node_fruits_change(amount) -> void:
+	fruits_label.text = str(amount) + " Fruits"

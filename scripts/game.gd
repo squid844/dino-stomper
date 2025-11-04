@@ -1,7 +1,7 @@
 extends Node3D
 
-
 @export var stego_scene : PackedScene
+
 
 @onready var general_data = $DataManager.general_data
 @onready var perpetual_data = $DataManager.perpetual_data
@@ -22,7 +22,7 @@ extends Node3D
 signal island_clicked
 signal stomps_change
 signal fruits_change
-signal stego_purchased
+
 signal reset_data
 signal restart_game
 
@@ -60,6 +60,7 @@ func update_stomp_rate() -> void:
 func _on_island_clicked() -> void:
 	$DataManager.general_data["stomps"] += $DataManager.general_data["amount_per_click"]
 	emit_signal("stomps_change", $DataManager.general_data["stomps"])
+	# logic to increase the number of fruits whenever enough stomps are collected
 	if ($DataManager.general_data["stomps"] - $DataManager.general_data["consumed_stomps"] >= $DataManager.general_data["stomps_per_fruit"]):
 		$DataManager.general_data["fruits"] += int(($DataManager.general_data["stomps"] - $DataManager.general_data["consumed_stomps"]) / $DataManager.general_data["stomps_per_fruit"])
 		$DataManager.general_data["consumed_stomps"] = $DataManager.general_data["stomps"] - $DataManager.general_data["stomps"] % $DataManager.general_data["stomps_per_fruit"]
@@ -90,20 +91,6 @@ func instantiate_dinos(dino_type: String, number_of_dinos: int, init : bool) -> 
 			dino.position = spawnPoints[i]
 			dino_group.add_child(dino)
 		
-		
-
-func _on_stego_button_button_down() -> void:
-	if $DataManager.general_data["fruits"] >= $DataManager.dino_stats["stego"]["current_price"]:
-		$DataManager.general_data["fruits"]-=$DataManager.dino_stats["stego"]["current_price"] # update fruits
-		$DataManager.dino_stats["stego"]["current_price"] *=2 #update stego price
-		$DataManager.dino_stats["stego"]["number"]+=1
-		$DataManager.general_data["total_dinos"]+=1
-		emit_signal("fruits_change", $DataManager.general_data["fruits"])
-		emit_signal("stego_purchased", $DataManager.dino_stats["stego"]["current_price"])
-		instantiate_dinos("stego",1,false)
-		update_stomp_rate()
-
-
 
 
 func _on_meteorite_game_over() -> void:

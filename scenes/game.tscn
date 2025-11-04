@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dkfy3y2orda1t"]
+[gd_scene load_steps=14 format=3 uid="uid://dkfy3y2orda1t"]
 
 [ext_resource type="Script" uid="uid://dldp6b70n8ccj" path="res://scripts/game.gd" id="1_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://yp3oyehyqa4a" path="res://scenes/dino.tscn" id="2_iywne"]
@@ -8,14 +8,11 @@
 [ext_resource type="PackedScene" uid="uid://dhgao3k34766f" path="res://scenes/options_menu.tscn" id="4_kvuet"]
 [ext_resource type="PackedScene" uid="uid://c24yr7xx7bwps" path="res://scenes/island.tscn" id="4_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://cf6u8mc1ko724" path="res://scenes/space.tscn" id="4_vtaks"]
-[ext_resource type="Texture2D" uid="uid://u86veet8lfqs" path="res://assets/sprites/stego.png" id="6_gee14"]
 [ext_resource type="PackedScene" uid="uid://58q7a2w4p7g1" path="res://scenes/meteorite.tscn" id="6_vtaks"]
-[ext_resource type="Script" uid="uid://ivxruahk22dp" path="res://scripts/dino_buttons.gd" id="8_0tnpc"]
 [ext_resource type="Texture2D" uid="uid://bxyygs7sd6vmx" path="res://assets/images/frame.png" id="8_trtic"]
 [ext_resource type="FontFile" uid="uid://m4cqhajh3qxk" path="res://assets/fonts/Tiny5/Tiny5-Regular.ttf" id="9_0tnpc"]
 [ext_resource type="PackedScene" uid="uid://dh1odu7gvadb0" path="res://scenes/fade_transition.tscn" id="11_kvpfn"]
-
-[sub_resource type="QuadMesh" id="QuadMesh_gee14"]
+[ext_resource type="PackedScene" uid="uid://b7qv2xt8iio7u" path="res://scenes/dino_button_node.tscn" id="11_kvuet"]
 
 [node name="Game" type="Node3D"]
 script = ExtResource("1_yqjtg")
@@ -109,58 +106,20 @@ offset_right = 851.0
 offset_bottom = -40.0
 grow_vertical = 0
 alignment = 1
-script = ExtResource("8_0tnpc")
 
-[node name="StegoButton" type="TextureButton" parent="ControlLayer/DinoButtons"]
-clip_contents = true
-custom_minimum_size = Vector2(170, 180)
+[node name="StegoButtonNode" parent="ControlLayer/DinoButtons" instance=ExtResource("11_kvuet")]
+custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 2
-ignore_texture_size = true
+size_flags_horizontal = 4
+size_flags_vertical = 4
+dino_type = "stego"
 
-[node name="Background" type="MeshInstance2D" parent="ControlLayer/DinoButtons/StegoButton"]
-self_modulate = Color(0.44694465, 0.25272858, 0.4243774, 0.3254902)
-show_behind_parent = true
-position = Vector2(85, 90)
-scale = Vector2(170, 180)
-mesh = SubResource("QuadMesh_gee14")
-
-[node name="NameTag" type="Label" parent="ControlLayer/DinoButtons/StegoButton"]
-texture_filter = 1
-layout_mode = 0
-offset_left = 5.0
-offset_top = 1.0
-offset_right = 220.0
-offset_bottom = 74.0
-theme_override_fonts/font = ExtResource("9_0tnpc")
-theme_override_font_sizes/font_size = 30
-text = "Stegosaurus
-"
-
-[node name="CostTag" type="Label" parent="ControlLayer/DinoButtons/StegoButton"]
-texture_filter = 1
-layout_mode = 0
-offset_left = 5.0
-offset_top = 147.0
-offset_right = 192.00006
-offset_bottom = 220.0
-theme_override_fonts/font = ExtResource("9_0tnpc")
-theme_override_font_sizes/font_size = 30
-text = "Cost : 
-"
-
-[node name="StegoImage" type="Sprite2D" parent="ControlLayer/DinoButtons/StegoButton"]
-position = Vector2(84.99999, 90.99999)
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("6_gee14")
-
-[node name="Button" type="Button" parent="ControlLayer"]
+[node name="OptionButton" type="Button" parent="ControlLayer"]
 layout_mode = 0
 offset_left = 30.0
-offset_top = 30.0
+offset_top = 29.0
 offset_right = 145.0
-offset_bottom = 80.0
+offset_bottom = 79.0
 text = "Options
 "
 
@@ -192,14 +151,13 @@ visible = false
 [connection signal="island_clicked" from="." to="Scenery/Island" method="_on_game_island_clicked"]
 [connection signal="reset_data" from="." to="." method="_on_reset_data"]
 [connection signal="restart_game" from="." to="." method="_on_restart_game"]
-[connection signal="stego_purchased" from="." to="." method="_on_stego_purchased"]
-[connection signal="stego_purchased" from="." to="ControlLayer/DinoButtons" method="_on_game_stego_purchased"]
 [connection signal="stomps_change" from="." to="ControlLayer/Stats" method="_on_game_stomps_change"]
 [connection signal="reset_data" from="DataManager" to="DataManager" method="_on_reset_data"]
 [connection signal="update_timer_tag" from="DataManager" to="ControlLayer/Stats" method="_on_data_manager_update_timer_tag"]
 [connection signal="game_over" from="Scenery/Meteorite" to="." method="_on_meteorite_game_over"]
 [connection signal="update_timer_tag" from="Scenery/Meteorite" to="ControlLayer/Stats" method="_on_data_manager_update_timer_tag"]
-[connection signal="button_down" from="ControlLayer/DinoButtons/StegoButton" to="." method="_on_stego_button_button_down"]
-[connection signal="button_down" from="ControlLayer/Button" to="OptionsMenu" method="_on_button_button_down"]
+[connection signal="dino_purchased" from="ControlLayer/DinoButtons/StegoButtonNode" to="ControlLayer/DinoButtons/StegoButtonNode" method="_on_dino_purchased"]
+[connection signal="fruits_change" from="ControlLayer/DinoButtons/StegoButtonNode" to="ControlLayer/Stats" method="_on_stego_button_node_fruits_change"]
+[connection signal="button_down" from="ControlLayer/OptionButton" to="OptionsMenu" method="_on_button_button_down"]
 [connection signal="timeout" from="ControlLayer/FadeTransition/FadeTimer" to="." method="_on_fade_timer_timeout"]
 [connection signal="timeout" from="ControlLayer/FadeTransition/GameOverTimer" to="." method="_on_game_over_timer_timeout"]
