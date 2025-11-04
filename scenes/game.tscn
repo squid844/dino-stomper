@@ -94,25 +94,45 @@ theme_override_font_sizes/font_size = 40
 text = "0 fruits"
 vertical_alignment = 1
 
-[node name="DinoButtons" type="VBoxContainer" parent="ControlLayer"]
-custom_minimum_size = Vector2(800, 650)
+[node name="DinoButtonsRow1" type="VBoxContainer" parent="ControlLayer"]
+custom_minimum_size = Vector2(400, 650)
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 30.0
-offset_top = -500.0
-offset_right = 851.0
+offset_top = -690.0
+offset_right = 430.0
 offset_bottom = -40.0
-grow_vertical = 0
 alignment = 1
 
-[node name="StegoButtonNode" parent="ControlLayer/DinoButtons" instance=ExtResource("11_kvuet")]
-custom_minimum_size = Vector2(200, 200)
+[node name="StegoButtonNode" parent="ControlLayer/DinoButtonsRow1" instance=ExtResource("11_kvuet")]
+clip_contents = true
+custom_minimum_size = Vector2(275, 230)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 dino_type = "stego"
+
+[node name="DinoButtonsRow3" type="VBoxContainer" parent="ControlLayer"]
+custom_minimum_size = Vector2(400, 650)
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 440.0
+offset_top = -690.0
+offset_right = 840.0
+offset_bottom = -40.0
+alignment = 1
+
+[node name="PteroButton" parent="ControlLayer/DinoButtonsRow3" instance=ExtResource("11_kvuet")]
+clip_contents = true
+custom_minimum_size = Vector2(275, 230)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+dino_type = "ptero"
 
 [node name="OptionButton" type="Button" parent="ControlLayer"]
 layout_mode = 0
@@ -124,10 +144,9 @@ text = "Options
 "
 
 [node name="FadeTransition" parent="ControlLayer" instance=ExtResource("11_kvpfn")]
+visible = false
 layout_mode = 1
 mouse_filter = 2
-
-[node name="FadeTimer" type="Timer" parent="ControlLayer/FadeTransition"]
 
 [node name="GameOverTimer" type="Timer" parent="ControlLayer/FadeTransition"]
 wait_time = 0.9
@@ -156,8 +175,7 @@ visible = false
 [connection signal="update_timer_tag" from="DataManager" to="ControlLayer/Stats" method="_on_data_manager_update_timer_tag"]
 [connection signal="game_over" from="Scenery/Meteorite" to="." method="_on_meteorite_game_over"]
 [connection signal="update_timer_tag" from="Scenery/Meteorite" to="ControlLayer/Stats" method="_on_data_manager_update_timer_tag"]
-[connection signal="dino_purchased" from="ControlLayer/DinoButtons/StegoButtonNode" to="ControlLayer/DinoButtons/StegoButtonNode" method="_on_dino_purchased"]
-[connection signal="fruits_change" from="ControlLayer/DinoButtons/StegoButtonNode" to="ControlLayer/Stats" method="_on_stego_button_node_fruits_change"]
+[connection signal="dino_purchased" from="ControlLayer/DinoButtonsRow1/StegoButtonNode" to="ControlLayer/DinoButtonsRow1/StegoButtonNode" method="_on_dino_purchased"]
+[connection signal="fruits_change" from="ControlLayer/DinoButtonsRow1/StegoButtonNode" to="ControlLayer/Stats" method="_on_stego_button_node_fruits_change"]
 [connection signal="button_down" from="ControlLayer/OptionButton" to="OptionsMenu" method="_on_button_button_down"]
-[connection signal="timeout" from="ControlLayer/FadeTransition/FadeTimer" to="." method="_on_fade_timer_timeout"]
 [connection signal="timeout" from="ControlLayer/FadeTransition/GameOverTimer" to="." method="_on_game_over_timer_timeout"]

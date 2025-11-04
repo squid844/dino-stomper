@@ -46,11 +46,15 @@ text = "Total Dinos this cycle :
 
 [node name="RestartButton" type="Button" parent="GameOverStats"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ccgoi")
+theme_override_font_sizes/font_size = 30
 text = "Start a new Cycle
 "
 
 [node name="QuitButton" type="Button" parent="GameOverStats"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ccgoi")
+theme_override_font_sizes/font_size = 30
 text = "Quit Game
 "
 

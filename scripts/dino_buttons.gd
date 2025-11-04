@@ -13,7 +13,7 @@ signal dino_purchased
 
 func _ready() -> void:
 	await(get_tree().process_frame)
-	cost_tag.text = "Cost : " + str(data_manager.dino_stats["stego"]["current_price"])
+	cost_tag.text = "Cost : " + str(data_manager.dino_stats[dino_type]["current_price"])+" / "+str(data_manager["dino_stats"][dino_type]["number"]) + " "+ dino_type
 
 func _on_buy_button_button_down() -> void:
 	if data_manager.general_data["fruits"] >= data_manager.dino_stats[dino_type]["current_price"]:
@@ -22,10 +22,10 @@ func _on_buy_button_button_down() -> void:
 		data_manager.dino_stats[dino_type]["number"]+=1
 		data_manager.general_data["total_dinos"]+=1
 		emit_signal("fruits_change", data_manager.general_data["fruits"])
-		emit_signal("dino_purchased", data_manager.dino_stats[dino_type]["current_price"])
+		emit_signal("dino_purchased", data_manager.dino_stats[dino_type]["current_price"], dino_type)
 		game.instantiate_dinos(dino_type,1,false)
 		game.update_stomp_rate()
 
 
-func _on_dino_purchased(current_price) -> void:
-	cost_tag.text = "Cost : " + str(current_price)
+func _on_dino_purchased(current_price, dino_type) -> void:
+	cost_tag.text = "Cost : " + str(current_price) +" / "+str(data_manager["dino_stats"][dino_type]["number"]) + " "+ dino_type

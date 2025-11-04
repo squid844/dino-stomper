@@ -16,7 +16,6 @@ extends Node3D
 @onready var dino_group: Node3D
 
 @onready var fade_transition: ColorRect = $ControlLayer/FadeTransition
-@onready var fade_timer: Timer = $ControlLayer/FadeTransition/FadeTimer
 @onready var fade_transition_animation_player:AnimationPlayer = $ControlLayer/FadeTransition/AnimationPlayer
 
 signal island_clicked
@@ -29,7 +28,6 @@ signal restart_game
 
 func _ready() -> void:
 	fade_transition_animation_player.play("fade_out")
-	fade_timer.start()
 	#data_manager.save_data()
 	data_manager.load_data()
 	$DataManager.general_data["consumed_stomps"] = $DataManager.general_data["stomps"] - $DataManager.general_data["stomps"] % $DataManager.general_data["stomps_per_fruit"] # used to calculate on much steps needed to update fruit
@@ -67,8 +65,6 @@ func _on_island_clicked() -> void:
 		
 		emit_signal("fruits_change", $DataManager.general_data["fruits"])
 
-
-
 func instantiate_dinos(dino_type: String, number_of_dinos: int, init : bool) -> void:
 	var spawnPoints = island.spawnPoints
 	var dinoScale = island.dinoScale
@@ -101,25 +97,12 @@ func _on_meteorite_game_over() -> void:
 	data_manager.save_data()
 	var game_over_timer: Timer = $ControlLayer/FadeTransition/GameOverTimer
 	game_over_timer.start()	
-	
-	
-func _on_fade_timer_timeout() -> void:
-	#fade_transition.hide()
-	pass
-
 
 func _on_restart_game() -> void:
 	emit_signal("reset_data")
 	fade_transition.show() # to rework
 	fade_transition_animation_player.play("fade_in")
-	fade_timer.start()
-	fade_transition_animation_player.play("fade_out")
-	$ControlLayer/DinoButtons.show()
-	$ControlLayer/Stats.show()
-
 
 func _on_game_over_timer_timeout() -> void:
 	get_tree().change_scene_to_file("res://scenes/game_over_menu.tscn")
 	emit_signal("restart_game")
-
-	

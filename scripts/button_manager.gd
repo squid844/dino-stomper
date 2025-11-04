@@ -24,6 +24,7 @@ func play_animation(animation_type)->void:
 	fade_transition_animation_player.play(animation_type)
 	
 func _on_fade_timer_timeout() -> void:
+	# go straight to game over menu if you previously lost
 	if (data_manager.time_dico["crash_timer"] <=1):
 		get_tree().change_scene_to_file("res://scenes/game_over_menu.tscn")
 	else:

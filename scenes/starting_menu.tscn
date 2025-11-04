@@ -1,16 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://ejqnjd18110x"]
+[gd_scene load_steps=6 format=3 uid="uid://ejqnjd18110x"]
 
 [ext_resource type="Script" uid="uid://b6frq1fysmcd" path="res://scripts/button_manager.gd" id="1_cxv6e"]
 [ext_resource type="PackedScene" uid="uid://dr1872ok4d46m" path="res://scenes/data_manager.tscn" id="1_kp2u6"]
 [ext_resource type="PackedScene" uid="uid://dh1odu7gvadb0" path="res://scenes/fade_transition.tscn" id="2_ncxof"]
 [ext_resource type="Texture2D" uid="uid://coow5y348dniq" path="res://assets/images/dino_clicker_logo_1.png" id="4_6gt2g"]
+[ext_resource type="FontFile" uid="uid://m4cqhajh3qxk" path="res://assets/fonts/Tiny5/Tiny5-Regular.ttf" id="4_ec4vr"]
 
 [node name="StartingMenu" type="Node2D"]
 
 [node name="DataManager" parent="." instance=ExtResource("1_kp2u6")]
 
 [node name="DinoClickerLogo1" type="Sprite2D" parent="."]
-position = Vector2(965, 237)
+position = Vector2(965, 468.00006)
 scale = Vector2(1.0804688, 1.1750001)
 texture = ExtResource("4_6gt2g")
 
@@ -24,17 +25,21 @@ script = ExtResource("1_cxv6e")
 [node name="StartButton" type="Button" parent="ButtonManager"]
 layout_mode = 0
 offset_left = 710.0
-offset_top = 400.0
+offset_top = 614.0
 offset_right = 1210.0
-offset_bottom = 500.0
+offset_bottom = 714.0
+theme_override_fonts/font = ExtResource("4_ec4vr")
+theme_override_font_sizes/font_size = 30
 text = "START GAME"
 
 [node name="QuitButton" type="Button" parent="ButtonManager"]
 layout_mode = 0
 offset_left = 710.0
-offset_top = 600.0
+offset_top = 766.0
 offset_right = 1210.0
-offset_bottom = 700.0
+offset_bottom = 866.0
+theme_override_fonts/font = ExtResource("4_ec4vr")
+theme_override_font_sizes/font_size = 30
 text = "QUIT GAME"
 
 [node name="FadeTransition" parent="ButtonManager" instance=ExtResource("2_ncxof")]

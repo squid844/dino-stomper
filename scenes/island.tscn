@@ -36,10 +36,10 @@ script = ExtResource("1_g61je")
 dino_scene = ExtResource("1_2v8eh")
 
 [node name="island" parent="." instance=ExtResource("3_1uhhg")]
-transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, -2.7938452, 0)
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="island"]
-transform = Transform3D(0.5, 0, 0, 0, 0.010933641, 0.49988046, 0, -0.49988046, 0.010933641, 2.5551069, 4.024046, -2.1138334)
+transform = Transform3D(0.5, 0, 0, 0, 0.010933641, 0.49988046, 0, -0.49988046, 0.010933641, 2.5551069, 4.158778, -2.2387643)
 amount = 15
 lifetime = 4.0
 preprocess = 1.0
@@ -49,3 +49,4 @@ process_material = SubResource("ParticleProcessMaterial_cngje")
 draw_pass_1 = SubResource("SphereMesh_gt8d0")
 
 [node name="DinoGroup" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8009634, 0)
