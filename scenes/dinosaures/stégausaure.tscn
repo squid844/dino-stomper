@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://do0crpxd3pn5f"]
+
+[ext_resource type="PackedScene" uid="uid://das64uhxihsem" path="res://assets/sprites/stégausaure.glb" id="1_35c60"]
+[ext_resource type="Script" uid="uid://cnok4di4xel7o" path="res://scripts/stégausaure.gd" id="2_b5x6u"]
+
+[node name="stégausaure" instance=ExtResource("1_35c60")]
+script = ExtResource("2_b5x6u")

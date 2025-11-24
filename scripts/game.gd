@@ -1,10 +1,9 @@
 extends Node3D
 
 @export var stego_scene : PackedScene
-
+@export var ptero_scene : PackedScene
 
 @onready var general_data = $DataManager.general_data
-@onready var perpetual_data = $DataManager.perpetual_data
 @onready var base_dino_stats = $DataManager.base_dino_stats
 @onready var dino_stats = $DataManager.dino_stats
 @onready var data_manager: Node2D = $DataManager
@@ -22,9 +21,12 @@ signal island_clicked
 signal stomps_change
 signal fruits_change
 
+signal dino_unlocked
+
 signal reset_data
 signal restart_game
 
+@onready var click_ratio := 10
 
 func _ready() -> void:
 	fade_transition_animation_player.play("fade_out")
@@ -37,8 +39,9 @@ func _ready() -> void:
 	
 	island = $Scenery/Island
 	dino_group = island.dino_group
-
-	instantiate_dinos("stego",$DataManager.general_data["total_dinos"], true)
+	for dino_type in data_manager.dino_stats.keys():
+		if data_manager.dino_stats[dino_type]["number"] > 0:
+			instantiate_dinos(dino_type)
 	update_stomp_rate()
 
 
@@ -50,14 +53,15 @@ func _unhandled_input(event):
 		 
 func update_stomp_rate() -> void:
 	var temp_apc = 0
-	for dino in $DataManager.dino_stats:
-		temp_apc += $DataManager.dino_stats[dino]["number"] * $DataManager.dino_stats[dino]["stomp_per_jump"]#!!!!
+	for _dino in $DataManager.dino_stats:
+		temp_apc += $DataManager.dino_stats[_dino]["number"] * $DataManager.dino_stats[_dino]["stomp_per_jump"]#!!!!
 	$DataManager.general_data["amount_per_click"] = temp_apc
 
 
 func _on_island_clicked() -> void:
 	$DataManager.general_data["stomps"] += $DataManager.general_data["amount_per_click"]
 	emit_signal("stomps_change", $DataManager.general_data["stomps"])
+
 	# logic to increase the number of fruits whenever enough stomps are collected
 	if ($DataManager.general_data["stomps"] - $DataManager.general_data["consumed_stomps"] >= $DataManager.general_data["stomps_per_fruit"]):
 		$DataManager.general_data["fruits"] += int(($DataManager.general_data["stomps"] - $DataManager.general_data["consumed_stomps"]) / $DataManager.general_data["stomps_per_fruit"])
@@ -65,7 +69,7 @@ func _on_island_clicked() -> void:
 		
 		emit_signal("fruits_change", $DataManager.general_data["fruits"])
 
-func instantiate_dinos(dino_type: String, number_of_dinos: int, init : bool) -> void:
+func instantiate_dinos(dino_type: String) -> void:
 	var spawnPoints = island.spawnPoints
 	var dinoScale = island.dinoScale
 	# Récupère la variable correspondant à dino_type+"_scene"
@@ -74,26 +78,17 @@ func instantiate_dinos(dino_type: String, number_of_dinos: int, init : bool) -> 
 	if scene_to_instantiate == null:
 		push_error("Scene not found for dino_type: " + dino_type)
 		return
-	if init:
-		for i in range(min(number_of_dinos,len(spawnPoints))):
-			var dino = scene_to_instantiate.instantiate()
-			dino.scale = dinoScale
-			dino.position = spawnPoints[i]
-			dino_group.add_child(dino)
-	else:
-		for i in range(min(number_of_dinos,len(spawnPoints)),len(spawnPoints)):
-			var dino = scene_to_instantiate.instantiate()
-			dino.scale = dinoScale
-			dino.position = spawnPoints[i]
-			dino_group.add_child(dino)
-		
+	
+	var _dino = scene_to_instantiate.instantiate()
+	_dino.scale = dinoScale
+	_dino.position = spawnPoints[dino_type]
+	dino_group.add_child(_dino)
 
 
 func _on_meteorite_game_over() -> void:
 	# handles the logic of game over actions : hiding stats and buttons and showing game over layout with updated data
 	fade_transition.show()
 	fade_transition_animation_player.play("fade_in")
-	
 	data_manager.save_data()
 	var game_over_timer: Timer = $ControlLayer/FadeTransition/GameOverTimer
 	game_over_timer.start()	
@@ -103,6 +98,23 @@ func _on_restart_game() -> void:
 	fade_transition.show() # to rework
 	fade_transition_animation_player.play("fade_in")
 
+
+func _process(delta: float) -> void:
+	if data_manager.dino_stats["ptero"]["number"]>0:
+		if click_ratio >=30/data_manager.dino_stats["ptero"]["number"]:	
+			auto_click()
+			click_ratio = 0
+		else:
+			click_ratio += 1
+	# logic to unlock dinos
+	for _dino in data_manager.dino_stats:
+		if (not data_manager.general_data["dino_unlocked"][_dino]) and $DataManager.general_data["stomps"] >= data_manager.dino_stats[_dino]["base_price"] * 10:
+			data_manager.general_data["dino_unlocked"][_dino] = true
+			emit_signal("dino_unlocked", _dino)
+			
+func auto_click()->void:
+	emit_signal("island_clicked")
+	
 func _on_game_over_timer_timeout() -> void:
 	get_tree().change_scene_to_file("res://scenes/game_over_menu.tscn")
 	emit_signal("restart_game")

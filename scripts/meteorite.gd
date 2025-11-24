@@ -8,6 +8,7 @@ extends Node3D
 @onready var time_dico = data_manager.time_dico
 @onready var stomps : int 
 @onready var threshold_timer: Timer = $ThresholdTimer
+@onready var gpu_particles_3d: GPUParticles3D = $GPUParticles3D
 
 
 @onready var meteorite: Node3D = $"."
@@ -20,7 +21,6 @@ signal update_timer_tag
 signal game_over
 
 func _ready() -> void:
-	
 	await get_tree().process_frame
 	time_dico = data_manager.time_dico
 	pos_x = data_manager.meteorite_data["pos_x"]
@@ -61,9 +61,9 @@ func update_meteorite_scale():
 	scale_tween_y = create_tween()
 	
 	var t : float = clamp(data_manager.time_dico["crash_timer"] / 60.0, 0.0, 1.0) # Normalise la valeur du timer entre 0 et 1
-	scale_tween_x.tween_property(self, "pos_x", 20.0+t*10.0, 1.0)
-	scale_tween_y.tween_property(self, "pos_y", 10.0+t*15.0, 1.0)
-	scale_factor = clamp(2*(1.0 - t), 1.0, 2.0)
+	scale_tween_x.tween_property(self, "pos_x", 5.0+t*15.0, 1.0)
+	scale_tween_y.tween_property(self, "pos_y", 20.0+t*15.0, 1.0)
+	scale_factor = clamp(3*(1.0 - t), 1.0, 3.0)
 	data_manager.meteorite_data["scale"] = scale_factor
 	meteorite.scale = Vector3.ONE * scale_factor
 	
@@ -73,7 +73,7 @@ func update_meteorite_scale():
 		update_meteorite_power()
 
 func _process(_delta):
-	position = Vector3(pos_x,pos_y,5.0)
+	position = Vector3(pos_x,pos_y,-5.0)
 	data_manager.meteorite_data['pos_x'] = pos_x
 	data_manager.meteorite_data['pos_y'] = pos_y
 

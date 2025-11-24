@@ -8,14 +8,15 @@ extends Node3D
 
 
 var movement_speed := 0.006
-var moving_direction := 1.0
+var moving_theta := 0.0
+@onready var gpu_particles_3d: GPUParticles3D = $island/GPUParticles3D
 
-var dinoHeight := 1.05 #Supposed to change depending on the dinoScale, must be put in dino script
+
 var dinoScale := Vector3(0.5,0.5,0.5)
 
 @onready var spawnPoints = {
-	0: Vector3(0,dinoHeight,0),
-	1 : Vector3(-15,dinoHeight,-10),
+	"stego": Vector3(-15,1.05,-10),
+	"ptero" : Vector3(5,17,10),
 }		
 
 func _on_game_island_clicked() -> void:
@@ -24,7 +25,8 @@ func _on_game_island_clicked() -> void:
 		dino.jump()
 
 func _process(_delta: float) -> void:
-	if position.y >= 0.3 or position.y <= -0.3: 
-		moving_direction = -moving_direction
-	position.y += (1-sqrt((position.y)**2))**2 * movement_speed* moving_direction
+	moving_theta += 0.02
+	if moving_theta >= 360:
+		moving_theta = 0
+	position.y += sin(moving_theta)/100
 	

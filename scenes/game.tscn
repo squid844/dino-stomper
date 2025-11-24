@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://dkfy3y2orda1t"]
+[gd_scene load_steps=15 format=3 uid="uid://dkfy3y2orda1t"]
 
 [ext_resource type="Script" uid="uid://dldp6b70n8ccj" path="res://scripts/game.gd" id="1_yqjtg"]
-[ext_resource type="PackedScene" uid="uid://yp3oyehyqa4a" path="res://scenes/dino.tscn" id="2_iywne"]
+[ext_resource type="PackedScene" uid="uid://do0crpxd3pn5f" path="res://scenes/dinosaures/stégausaure.tscn" id="2_trtic"]
 [ext_resource type="PackedScene" uid="uid://dr1872ok4d46m" path="res://scenes/data_manager.tscn" id="3_dinhu"]
+[ext_resource type="PackedScene" uid="uid://byyggtfeyvf6i" path="res://scenes/dinosaures/ptero.tscn" id="3_ir15t"]
 [ext_resource type="Script" uid="uid://bed13xsg2p3j6" path="res://scripts/stats.gd" id="3_lnu2h"]
 [ext_resource type="Script" uid="uid://c7g8310sk5fnh" path="res://scripts/pixel_art_manager.gd" id="3_p57ef"]
 [ext_resource type="PackedScene" uid="uid://dhgao3k34766f" path="res://scenes/options_menu.tscn" id="4_kvuet"]
@@ -16,7 +17,8 @@
 
 [node name="Game" type="Node3D"]
 script = ExtResource("1_yqjtg")
-stego_scene = ExtResource("2_iywne")
+stego_scene = ExtResource("2_trtic")
+ptero_scene = ExtResource("3_ir15t")
 metadata/_edit_horizontal_guides_ = [-406.0]
 
 [node name="DataManager" parent="." instance=ExtResource("3_dinhu")]
@@ -27,7 +29,7 @@ pixel_node_paths = [NodePath("../Scenery/Island"), NodePath("../Scenery/Meteorit
 lighting_node = NodePath("../Lighting/DirectionalLight3D")
 
 [node name="MainCamera" type="Camera3D" parent="."]
-transform = Transform3D(0.9961947, 0.08715574, 0, -0.08583164, 0.98106027, 0.1736482, 0.015134435, -0.1729874, 0.9848078, -35.74036, 26.42603, 54.600464)
+transform = Transform3D(0.9961947, 0.08715574, 0, -0.08682408, 0.9924039, 0.08715574, 0.0075961226, -0.08682408, 0.9961947, -35.74036, 26.42603, 54.600464)
 
 [node name="Scenery" type="Node" parent="."]
 
@@ -38,7 +40,7 @@ transform = Transform3D(1, 0, 0, 0, 0.17364822, -0.9848077, 0, 0.9848077, 0.1736
 transform = Transform3D(0.693691, 0, 0.7202727, 0, 1, 0, -0.7202727, 0, 0.693691, 0, 0, 0)
 
 [node name="Meteorite" parent="Scenery" instance=ExtResource("6_vtaks")]
-transform = Transform3D(0.3851975, 0.92283416, 0, -0.92283416, 0.3851975, 0, 0, 0, 1, 30, 20, 0)
+transform = Transform3D(0.3851975, 0.92283416, 0, -0.92283416, 0.3851975, 0, 0, 0, 1, 20, 35, -5)
 
 [node name="ControlLayer" type="Control" parent="."]
 layout_mode = 3
@@ -94,7 +96,7 @@ theme_override_font_sizes/font_size = 35
 text = "0 fruits"
 vertical_alignment = 1
 
-[node name="DinoButtonsRow1" type="VBoxContainer" parent="ControlLayer"]
+[node name="DinoButtonsRow" type="VBoxContainer" parent="ControlLayer"]
 custom_minimum_size = Vector2(400, 900)
 layout_mode = 1
 anchors_preset = -1
@@ -102,36 +104,19 @@ anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 30.0
 offset_top = -950.0
-offset_right = 430.0
+offset_right = 859.0
 offset_bottom = -50.0
+grow_vertical = 0
 alignment = 1
 
-[node name="StegoButtonNode" parent="ControlLayer/DinoButtonsRow1" instance=ExtResource("11_kvuet")]
-clip_contents = true
+[node name="StegoButtonNode" parent="ControlLayer/DinoButtonsRow" instance=ExtResource("11_kvuet")]
 custom_minimum_size = Vector2(275, 230)
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
 dino_type = "stego"
 
-[node name="DinoButtonsRow2" type="VBoxContainer" parent="ControlLayer"]
-custom_minimum_size = Vector2(400, 900)
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 440.0
-offset_top = -950.0
-offset_right = 840.0
-offset_bottom = -50.0
-alignment = 1
-
-[node name="PteroButton" parent="ControlLayer/DinoButtonsRow2" instance=ExtResource("11_kvuet")]
-clip_contents = true
+[node name="PteroButton" parent="ControlLayer/DinoButtonsRow" instance=ExtResource("11_kvuet")]
 custom_minimum_size = Vector2(275, 230)
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
 dino_type = "ptero"
 
 [node name="OptionButton" type="Button" parent="ControlLayer"]
@@ -166,6 +151,8 @@ sky_mode = 1
 [node name="OptionsMenu" parent="." instance=ExtResource("4_kvuet")]
 visible = false
 
+[connection signal="dino_unlocked" from="." to="ControlLayer/DinoButtonsRow/StegoButtonNode" method="_on_game_dino_unlocked"]
+[connection signal="dino_unlocked" from="." to="ControlLayer/DinoButtonsRow/PteroButton" method="_on_game_dino_unlocked"]
 [connection signal="fruits_change" from="." to="ControlLayer/Stats" method="_on_game_fruits_change"]
 [connection signal="island_clicked" from="." to="." method="_on_island_clicked"]
 [connection signal="island_clicked" from="." to="Scenery/Island" method="_on_game_island_clicked"]
@@ -176,7 +163,9 @@ visible = false
 [connection signal="update_timer_tag" from="DataManager" to="ControlLayer/Stats" method="_on_data_manager_update_timer_tag"]
 [connection signal="game_over" from="Scenery/Meteorite" to="." method="_on_meteorite_game_over"]
 [connection signal="update_timer_tag" from="Scenery/Meteorite" to="ControlLayer/Stats" method="_on_data_manager_update_timer_tag"]
-[connection signal="dino_purchased" from="ControlLayer/DinoButtonsRow1/StegoButtonNode" to="ControlLayer/DinoButtonsRow1/StegoButtonNode" method="_on_dino_purchased"]
-[connection signal="fruits_change" from="ControlLayer/DinoButtonsRow1/StegoButtonNode" to="ControlLayer/Stats" method="_on_stego_button_node_fruits_change"]
+[connection signal="dino_purchased" from="ControlLayer/DinoButtonsRow/StegoButtonNode" to="ControlLayer/DinoButtonsRow/StegoButtonNode" method="_on_dino_purchased"]
+[connection signal="fruits_change" from="ControlLayer/DinoButtonsRow/StegoButtonNode" to="ControlLayer/Stats" method="on_dino_button_node_fruits_change"]
+[connection signal="dino_purchased" from="ControlLayer/DinoButtonsRow/PteroButton" to="ControlLayer/DinoButtonsRow/PteroButton" method="_on_dino_purchased"]
+[connection signal="fruits_change" from="ControlLayer/DinoButtonsRow/PteroButton" to="ControlLayer/Stats" method="on_dino_button_node_fruits_change"]
 [connection signal="button_down" from="ControlLayer/OptionButton" to="OptionsMenu" method="_on_button_button_down"]
 [connection signal="timeout" from="ControlLayer/FadeTransition/GameOverTimer" to="." method="_on_game_over_timer_timeout"]

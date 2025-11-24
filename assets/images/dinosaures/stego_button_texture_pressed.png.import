@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dsqjy5bi2aje6"
-path="res://.godot/imported/stego_button_texture_pressed.png-208b83422feca5ee88fd9db9163c4751.ctex"
+path="res://.godot/imported/stego_button_texture_pressed.png-8f1c899377943fce25a75aaf8696edb5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/stego_button_texture_pressed.png"
-dest_files=["res://.godot/imported/stego_button_texture_pressed.png-208b83422feca5ee88fd9db9163c4751.ctex"]
+source_file="res://assets/images/dinosaures/stego_button_texture_pressed.png"
+dest_files=["res://.godot/imported/stego_button_texture_pressed.png-8f1c899377943fce25a75aaf8696edb5.ctex"]
 
 [params]
 

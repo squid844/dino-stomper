@@ -64,6 +64,7 @@ layout_mode = 1
 [node name="FadeTimer" type="Timer" parent="FadeTransition"]
 autostart = true
 
+[connection signal="reset_data" from="DataManager" to="DataManager" method="_on_game_over_stats_reset_data"]
 [connection signal="reset_data" from="GameOverStats" to="DataManager" method="_on_game_over_stats_reset_data"]
 [connection signal="button_down" from="GameOverStats/RestartButton" to="GameOverStats" method="_on_restart_button_button_down"]
 [connection signal="button_down" from="GameOverStats/QuitButton" to="GameOverStats" method="_on_quit_button_button_down"]

@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://byyggtfeyvf6i"]
+
+[ext_resource type="PackedScene" uid="uid://cgp8thkegtamd" path="res://assets/sprites/ptero.glb" id="1_fn1vk"]
+[ext_resource type="Script" uid="uid://ckwbj8yxs80lb" path="res://scripts/ptero.gd" id="2_mat10"]
+
+[node name="ptero" instance=ExtResource("1_fn1vk")]
+transform = Transform3D(0.93928015, 0, -0.34315163, 0, 1, 0, 0.34315163, 0, 0.93928015, 0, 0, 0)
+script = ExtResource("2_mat10")
